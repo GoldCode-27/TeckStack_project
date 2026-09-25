@@ -10,9 +10,8 @@ export const pool = mysql.createPool({
     user:process.env.DB_USER,
 })
 
-export const safeQuery = async (sql,params)=>{
+// export const safeQuery = async (sql,params)=>{
 
-    const result = pool.query(sql, params);
-
-    return result[0];
-}
+//     const result = pool.query(sql, params);
+//     return result[0];
+// }

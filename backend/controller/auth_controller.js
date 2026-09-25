@@ -1,11 +1,31 @@
-// import {signUpService, loginService} from'./auth_controller.js'
+import { signUpService, loginService } from "../service/auth_service.js";
 
-export const signUpController = (req, res)=>{
+export const signUpController = async (req, res) => {
+  const { first_name, last_name, email, password } = req.body;
 
-    return res.send("Hello from login");
-}
+  const signupServices = await signUpService({
+    first_name,
+    last_name,
+    email,
+    password,
+  });
 
-export const loginController = (req, res)=>{
+  if (signupServices) {
+    return res.status(201).json({
+      msg: "user created successfully.",
+    });
+  } else {
+    return res.status(400).json({
+      msg: "couldn't register you,  pleease try again",
+    });
+  }
+};
 
-    return res.send("Hello from login");
-}
+export const loginController = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  const loginService = await loginService({ email, password });
+
+  next();
+  return res.send("Hello from login");
+};

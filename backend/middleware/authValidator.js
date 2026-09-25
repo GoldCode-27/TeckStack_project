@@ -11,7 +11,7 @@ const rejectInvalid = (res, message) =>
 
   //function to validate signup
 export const validateSignup = (req, res, next) => {
-  const { first_name, last_name, email, password } = req.body || {};
+  const { first_name, last_name, email, password } = req.body;
 
   if (!first_name?.trim())
      return rejectInvalid(res, "Name is required.");
@@ -33,8 +33,8 @@ export const validateSignup = (req, res, next) => {
   }
 
   req.body = {
-    firstName: first_name.trim(),
-    lastName:last_name.trim(),
+    first_name: first_name.trim(),
+    last_name:last_name.trim(),
     email: normalizeEmail(email),
     password,
   };

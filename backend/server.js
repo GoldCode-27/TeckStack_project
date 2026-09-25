@@ -11,7 +11,7 @@ app.use(express.json())
 app.use('/api', mainRouter)
 
 
-const  PORT = process.env.port || 3001
+const  PORT = process.env.port
 
 const StartServer = async ()=>{
 
