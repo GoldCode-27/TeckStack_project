@@ -10,8 +10,23 @@ export const pool = mysql.createPool({
     user:process.env.DB_USER,
 })
 
-// export const safeQuery = async (sql,params)=>{
 
-//     const result = pool.query(sql, params);
-//     return result[0];
-// }
+const ensureParams = params => {
+  if (params === undefined || params === null) {
+    throw new Error('SQL parameters are required');
+  }
+  const isArray = Array.isArray(params);
+  const isObject = !isArray && typeof params === 'object';
+  if (!isArray && !isObject) {
+    throw new Error('SQL parameters must be an array or object');
+  }
+};
+
+export const safeQuery = async (sql, params) => {
+  if (typeof sql !== 'string' || sql.trim().length === 0) {
+    throw new Error('SQL query must be a non-empty string');
+  }
+  ensureParams(params);
+  const [result] = await pool.execute(sql, params);
+  return result;
+};

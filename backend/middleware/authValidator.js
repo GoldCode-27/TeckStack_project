@@ -44,7 +44,7 @@ export const validateSignup = (req, res, next) => {
 
 //function to validate login
 export const validateLogin = (req, res, next) => {
-  const { email, password } = req.body || {};
+  const { email, password } = req.body;
 
   if (!email?.trim()) 
     return rejectInvalid(res, "Email is required.");
