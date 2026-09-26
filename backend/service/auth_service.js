@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken'
 import { safeQuery, pool } from "../config/databaseConfig.js";
 
 export const signUpService = async ({
@@ -33,6 +34,12 @@ export const loginService = async ({ email, password }) => {
   const login = users[0];
   const isMatch = await bcrypt.compare(password, login.password_hash);
 
+  const payload ={
+    first_name:users.first_name,
+    last_name: users.last_name
+  }
+  const token = jwt.sign(payload, "secrete_key")
+
   if (!isMatch) {
     return null;
   }
@@ -42,5 +49,6 @@ export const loginService = async ({ email, password }) => {
     email: login.email,
     first_name: login.first_name,
     last_name: login.last_name,
+    token:token
   };
 };
