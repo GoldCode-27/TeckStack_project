@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import express from'express'
 // import dotenv from'dotenv'
 
@@ -30,3 +31,6 @@ const StartServer = async ()=>{
 }
 
  StartServer();
+=======
+console.log("Hello, teams");
+>>>>>>> d59c5e29942318ba0f77a5b5648daa84089564c6
