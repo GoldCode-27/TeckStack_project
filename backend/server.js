@@ -1,13 +1,15 @@
-<<<<<<< HEAD
+//import express-async-errors module
+import 'express-async-errors';
+//import express module
 import express from'express'
 // import dotenv from'dotenv'
-
-
+import dotenv from 'dotenv'
 import { pool } from './config/databaseConfig.js';
 import mainRouter from'./routes/mainRouter.js'
 const app = express();
 
-// dotenv.config();
+dotenv.config();
+
 app.use(express.json())
 app.use('/api', mainRouter)
 
@@ -31,6 +33,3 @@ const StartServer = async ()=>{
 }
 
  StartServer();
-=======
-console.log("Hello, teams");
->>>>>>> d59c5e29942318ba0f77a5b5648daa84089564c6
